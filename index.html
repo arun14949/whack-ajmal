@@ -644,14 +644,15 @@ const HEADS = [
 
         const difficultyLevels = [
             { combo: 1, name: 'CHILL', shrinkTime: 2500, size: 75, spawnRate: 1500, maxTargets: 1, moveChance: 0 },
-            { combo: 5, name: 'WARM', shrinkTime: 2200, size: 70, spawnRate: 1300, maxTargets: 2, moveChance: 0 },
-            { combo: 10, name: 'SPICY', shrinkTime: 1900, size: 65, spawnRate: 1100, maxTargets: 2, moveChance: 0.15 },
-            { combo: 15, name: 'HOT', shrinkTime: 1600, size: 60, spawnRate: 900, maxTargets: 3, moveChance: 0.25 },
-            { combo: 20, name: 'CRAZY', shrinkTime: 1400, size: 55, spawnRate: 750, maxTargets: 3, moveChance: 0.35 },
-            { combo: 25, name: 'INSANE', shrinkTime: 1200, size: 52, spawnRate: 600, maxTargets: 4, moveChance: 0.45 },
-            { combo: 30, name: 'CHAOS', shrinkTime: 1000, size: 50, spawnRate: 500, maxTargets: 5, moveChance: 0.55 },
-            { combo: 40, name: 'NIGHTMARE', shrinkTime: 850, size: 48, spawnRate: 400, maxTargets: 5, moveChance: 0.65 },
-            { combo: 50, name: '☠️ DEATH', shrinkTime: 700, size: 46, spawnRate: 350, maxTargets: 6, moveChance: 0.75 },
+            { combo: 3, name: 'WARM', shrinkTime: 2200, size: 70, spawnRate: 1300, maxTargets: 1, moveChance: 0 },
+            { combo: 5, name: 'SPICY', shrinkTime: 1800, size: 65, spawnRate: 1000, maxTargets: 2, moveChance: 0.1 },
+            { combo: 7, name: 'HOT', shrinkTime: 1500, size: 58, spawnRate: 800, maxTargets: 2, moveChance: 0.25 },
+            { combo: 10, name: 'CRAZY', shrinkTime: 1200, size: 52, spawnRate: 650, maxTargets: 3, moveChance: 0.4 },
+            { combo: 13, name: 'INSANE', shrinkTime: 1000, size: 48, spawnRate: 500, maxTargets: 4, moveChance: 0.5 },
+            { combo: 16, name: 'CHAOS', shrinkTime: 850, size: 45, spawnRate: 400, maxTargets: 5, moveChance: 0.6 },
+            { combo: 20, name: 'NIGHTMARE', shrinkTime: 700, size: 42, spawnRate: 350, maxTargets: 5, moveChance: 0.7 },
+            { combo: 25, name: '☠️ DEATH', shrinkTime: 550, size: 40, spawnRate: 300, maxTargets: 6, moveChance: 0.8 },
+            { combo: 30, name: '💀 IMPOSSIBLE', shrinkTime: 450, size: 38, spawnRate: 250, maxTargets: 7, moveChance: 0.9 },
         ];
 
         function getDifficulty() {
@@ -870,14 +871,14 @@ const HEADS = [
             setTimeout(() => popup.remove(), 700);
 
             // Screen shake
-            if (state.combo >= 10) {
+            if (state.combo >= 5) {
                 el.gameContainer.classList.remove('shake');
                 void el.gameContainer.offsetWidth;
                 el.gameContainer.classList.add('shake');
             }
 
             // Combo milestones
-            if ([5,10,15,20,25,30,40,50].includes(state.combo)) {
+            if ([5,7,10,13,16,20,25,30].includes(state.combo)) {
                 showCombo(state.combo, getDifficulty().name);
             }
 
@@ -960,14 +961,14 @@ const HEADS = [
         function updateUI() {
             el.score.textContent = state.score;
             el.combo.textContent = 'x' + state.combo;
-            el.combo.classList.toggle('danger', state.combo >= 20);
+            el.combo.classList.toggle('danger', state.combo >= 10);
         }
 
         function updateDifficultyUI() {
             const d = getDifficulty();
             el.difficultyText.textContent = d.name;
-            el.difficultyFill.style.width = Math.min(100, state.combo * 2) + '%';
-            el.warningOverlay.classList.toggle('active', state.combo >= 25);
+            el.difficultyFill.style.width = Math.min(100, state.combo * 3.3) + '%';
+            el.warningOverlay.classList.toggle('active', state.combo >= 13);
         }
 
         function updateLives() {
